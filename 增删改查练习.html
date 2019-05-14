@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>删除练习</title>
+		<style type="text/css">
+			table tr th {
+				border: 1px solid red;
+			}
+			td{
+				border: 1px solid red;
+			}
+			#employeetable{
+				border-collapse: collapse;
+				border: 1px solid red;
+			}
+			table{
+				border: 1px solid blueviolet;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				/*
+				 * 获取超链接
+				 */
+			var allA=document.getElementsByTagName("a")	;
+			//为每个超链接绑定一个单击响应函数
+			for(var i=0;i<allA.length;i++){
+				allA[i].onclick=function(){
+					//获取要删除的tr
+					var tr=this.parentNode.parentNode;
+					//获取要删除员工的名字
+					var name=tr.children[0].innerHTML;
+					//删除之前要弹出一个提示框
+					var flag=confirm("你确认删除"+name+"吗");
+					if (flag){
+						tr.parentNode.removeChild(tr);
+					};
+					return false;
+				};
+			};
+			
+			/*
+			 * 添加员工信息：
+			       为submit绑定单击响应函数
+			 */
+			var addEmpButton=document.getElementById("addEmpButton");
+			addEmpButton.onclick=function(){
+				
+				//获取员工的信息
+				var name=document.getElementById("empName").value;
+				var email=document.getElementById("email").value;
+				var salary=document.getElementById("salary").value;
+//				alert(name+","+email+","+salary+",");
+				
+				
+				//创建一个tr
+				var tr=document.createElement("tr")	;
+				//向tr中添加信息
+				tr.innerHTML="<td>"+name+"</td>"+
+				"<td>"+email+"</td>"+
+				"<td>"+salary+"</td>"+
+				"<td><a href='javascript: :'>删除</a></td>";
+				
+				
+				//获取添加的a元素，并为其绑定单击响应函数
+				var a=tr.getElementsByTagName("a")[0];
+				a.onclick=function(){
+					//获取要删除的tr
+					var tr=this.parentNode.parentNode;
+					//获取要删除员工的名字
+					var name=tr.children[0].innerHTML;
+					//删除之前要弹出一个提示框
+					var flag=confirm("你确认删除"+name+"吗");
+					if (flag){
+						tr.parentNode.removeChild(tr);
+					};
+					return false;
+				};
+				
+				
+				
+				
+		//获取table
+		     var employeetable=document.getElementById("employeetable");
+		     //获取table里的tbody
+		     var tbody=employeetable.getElementsByTagName("tbody")[0];
+		     tbody.appendChild(tr);
+		     
+			};
+			};
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		<table id="employeetable">
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Salary</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<th>Lucy</th>
+				<th>lucy@lucy.com</th>
+				<th>10000</th>
+				<th><a href="http://www.w3school.com.cn/tags/tag_table.asp">删除</a></th>
+			</tr>
+			<tr>
+				<th>Bob</th>
+				<th>boy@boy.com</th>
+				<th>7500</th>
+				<th><a href="http://www.w3school.com.cn/tags/tag_table.asp">删除</a></th>
+			</tr>
+		</table>
+		
+		<div id="formDiv">
+			<h4>添加新员工</h4>
+			<table>
+				<tr>
+					<td class="word">name</td>
+					<td class="inp">
+						<input type="text" name="empName" id="empName"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="word">email</td>
+					<td class="inp">
+						<input type="text" name="email" id="email"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="word">salary</td>
+					<td class="inp">
+						<input type="text" name="salary" id="salary"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button id="addEmpButton">
+							Submit
+						</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
